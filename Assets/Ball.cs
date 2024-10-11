@@ -19,27 +19,34 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Ball coordinate checking
+        
         // Checking x coordinate
-        if (transform.position.x > 10.0f)
+        if (transform.position.x > 8.0f)
         {
             direction.x = -direction.x;
         }
-        if (transform.position.x < -10.0f)
+        if (transform.position.x < -8.0f)
         {
             direction.x = -direction.x;
         }
         // Checking y coordinate
-        if (transform.position.y > 10.0f)
+        if (transform.position.y > 8.0f)
         {
             direction.y = -direction.y;
         }
-        if (transform.position.y < -10.0f)
+        if (transform.position.y < -8.0f)
         {
             direction.y = -direction.y;
         }
+
+        // Wizardry to make the ball move
+
         float dt = Time.deltaTime;
         Vector3 change = direction * speed * dt;
-        Debug.Log(change);
+        Debug.Log(change); //print ball location
         transform.position += change;
+
+
     }
 }
