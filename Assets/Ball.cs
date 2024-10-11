@@ -6,6 +6,8 @@ public class Ball : MonoBehaviour
 {
     Vector2 direction = Vector2.right;
     float speed = 6.0f;
+    float spin = 360;
+    float SPEEN = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +21,7 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Ball coordinate checking
+        // Ball bounce
         
         // Checking x coordinate
         if (transform.position.x > 8.0f)
@@ -47,6 +49,9 @@ public class Ball : MonoBehaviour
         Debug.Log(change); //print ball location
         transform.position += change;
 
+        // FUNNY ROTATION
+
+        transform.Rotate(new Vector3(0, spin + SPEEN, 0) * Time.deltaTime);
 
     }
 }

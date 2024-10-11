@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Collision : MonoBehaviour
 {
-    BoxCollider2D collider; // macro for BoxCollider2D
-    SpriteRenderer sr; // macro for SpriteRenderer to equal "sr"
+    BoxCollider2D bcollider;
+    SpriteRenderer sr;
 
     bool isCyan = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<BoxCollider2D>(); // getting boxcollider2d
+        bcollider = GetComponent<BoxCollider2D>(); // getting boxcollider2d
         sr = GetComponent<SpriteRenderer>(); // getting SpriteRenderer
         sr.color = Color.cyan;
         
@@ -35,6 +35,25 @@ public class Collision : MonoBehaviour
 
         //Converting to game world
         mouse = Camera.main.ScreenToWorldPoint(mouse);
+
+        //center of the rect
+        float x = transform.position.x;
+        float y = transform.position.y;
+        float hw = bcollider.size.x * transform.localScale.x * 0.5f;
+        float hh = bcollider.size.y * transform.localScale.y * 0.5f;
+
+        //point rect test against mouse
+        float xMin = x - hw;
+        float yMin = y - hh;
+        float xMax = x + hw;
+        float yMax = y + hh;
+
+        Debug.DrawLine(new Vector3(xMin, yMin), new Vector3(xMin, yMax), Color.red); //left
+        Debug.DrawLine(new Vector3(xMax, yMin), new Vector3(xMax, yMax), Color.yellow); //right
+        Debug.DrawLine(new Vector3(xMin, yMin), new Vector3(xMax, yMin), Color.blue); //top
+        Debug.DrawLine(new Vector3(xMin, yMax), new Vector3(xMax, yMax), Color.green); //bottom
+
         Debug.Log(mouse);
+
     }
 }
