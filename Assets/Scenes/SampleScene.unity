@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 833977900}
   - component: {fileID: 833977901}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Detectangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -376,7 +376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &1068485685
 SphereCollider:
   m_ObjectHideFlags: 0

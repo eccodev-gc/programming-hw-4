@@ -1,25 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Collision : MonoBehaviour
+public class PointRectTest : MonoBehaviour
 {
-    BoxCollider2D bcollider;
+    new BoxCollider2D collider;
     SpriteRenderer sr;
 
-    bool isCyan = true;
-
-    // Start is called before the first frame update
     void Start()
     {
-        bcollider = GetComponent<BoxCollider2D>(); // getting boxcollider2d
-        sr = GetComponent<SpriteRenderer>(); // getting SpriteRenderer
-        sr.color = Color.cyan;
-        
-        //if box is cyan, its cyan. if its not, its green.
-        if (isCyan)
+        collider = GetComponent<BoxCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
+
+        // Booleans "bool" are true/false values. They're what conditions in if-statements are evaluated as.
+        bool isRed = true;
+        if (isRed == true)
         {
-            sr.color = Color.cyan;
+            sr.color = Color.red;
         }
         else
         {
@@ -27,33 +22,58 @@ public class Collision : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Mouse is still in screenspace
+        // Mouse is in "screen-space" by default (coordinates of your monitor)
         Vector2 mouse = Input.mousePosition;
 
-        //Converting to game world
+        // Convert it to "world-space" to match the coordinates of your game objects!
         mouse = Camera.main.ScreenToWorldPoint(mouse);
 
-        //center of the rect
+        // x & y are the centre of our rectangle (game object)
         float x = transform.position.x;
         float y = transform.position.y;
-        float hw = bcollider.size.x * transform.localScale.x * 0.5f;
-        float hh = bcollider.size.y * transform.localScale.y * 0.5f;
+        float hw = collider.size.x * transform.localScale.x * 0.5f;
+        float hh = collider.size.y * transform.localScale.y * 0.5f;
 
-        //point rect test against mouse
+        // Use min & max values to do your point-rectangle test against the mouse!
         float xMin = x - hw;
-        float yMin = y - hh;
         float xMax = x + hw;
+        float yMin = y - hh;
         float yMax = y + hh;
 
-        Debug.DrawLine(new Vector3(xMin, yMin), new Vector3(xMin, yMax), Color.red); //left
-        Debug.DrawLine(new Vector3(xMax, yMin), new Vector3(xMax, yMax), Color.yellow); //right
-        Debug.DrawLine(new Vector3(xMin, yMin), new Vector3(xMax, yMin), Color.blue); //top
-        Debug.DrawLine(new Vector3(xMin, yMax), new Vector3(xMax, yMax), Color.green); //bottom
+        // Check our math by rendering lines!
+        Debug.DrawLine(new Vector3(xMin, yMin), new Vector3(xMin, yMax), Color.red);
+        Debug.DrawLine(new Vector3(xMax, yMin), new Vector3(xMax, yMax), Color.yellow);
+        Debug.DrawLine(new Vector3(xMin, yMin), new Vector3(xMax, yMin), Color.blue);
+        Debug.DrawLine(new Vector3(xMin, yMax), new Vector3(xMax, yMax), Color.green);
 
         Debug.Log(mouse);
+
+        // Homework 5:
+        // Compare mouse.x and mouse.y to rectangle min & max to determine whether there's collision.
+        // Colour red if collision, otherwise colour green!
+
+        if (mouse.x < xMin)
+        {
+            sr.color = Color.cyan;
+        }
+        else if (mouse.x > xMax)
+        {
+            sr.color = Color.magenta;
+        }
+        else if (mouse.y < yMin)
+        {
+            sr.color = Color.yellow;
+        }
+        else if (mouse.y > yMax) 
+        { 
+            sr.color = Color.black; 
+        }
+        else
+        {
+            sr.color = Color.red;
+        }
 
     }
 }
