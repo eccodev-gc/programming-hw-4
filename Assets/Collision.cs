@@ -72,7 +72,7 @@ public class PointRectTest : MonoBehaviour
         }
         else
         {
-            sr.color = Color.red;
+            sr.color = Color.gray;
         }
 
     }
